@@ -1,3 +1,4 @@
+
 function getSubtitle() {
   var spans = document.querySelectorAll('.player-timedtext span')
   return [].slice.call(spans).map(function(span) {
@@ -19,9 +20,10 @@ function observe() {
   observer.observe(subtitles, {childList: true})
 }
 
+var baseUrl = 'https://bla-server.herokuapp.com/subtitle'
 
-function send(original, callback) {
-  var url = "http://localhost:3000?&q=" + encodeURI(original)
+function send(text, callback) {
+  var url = baseUrl + '?q=' + encodeURI(text)
   fetch(url)
     .then(function(res) {
       return res.text()
