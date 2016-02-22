@@ -23,7 +23,7 @@ function observe() {
 var baseUrl = 'https://bla-server.herokuapp.com/subtitle'
 
 function send(text, callback) {
-  var url = baseUrl + '?q=' + encodeURI(text)
+  var url = baseUrl + '/' + encodeURI(text)
   fetch(url)
     .then(function(res) {
       return res.text()
