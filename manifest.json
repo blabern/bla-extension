@@ -1,0 +1,27 @@
+{
+  "name": "Blabern",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "",
+  "browser_action": {
+    "default_icon": "src/img/sync.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://netflix.com/*",
+        "https://netflix.com/*",
+        "http://www.netflix.com/*",
+        "https://www.netflix.com/*"
+      ],
+      "js": ["src/index.js"],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+
+  ],
+  "web_accessible_resources": [
+  ]
+}
