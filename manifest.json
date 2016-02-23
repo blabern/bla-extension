@@ -4,7 +4,6 @@
   "manifest_version": 2,
   "description": "",
   "browser_action": {
-    "default_icon": "src/img/sync.svg"
   },
   "content_scripts": [
     {
