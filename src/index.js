@@ -1,7 +1,7 @@
 (function() {
 
 var containerClass = 'player-timedtext-text-container'
-var baseUrl = 'https://bla-server.herokuapp.com/subtitle'
+var baseUrl = 'http://api.lingvo.tv/subtitle'
 
 function toArray(obj) {
   return [].slice.call(obj)
