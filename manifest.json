@@ -23,6 +23,11 @@
       "all_frames": false
     }
   ],
+  "icons": {
+    "16": "src/img/logo-16x16.png",
+    "48": "src/img/logo-48x48.png",
+    "128": "src/img/logo-128x128.png"
+  },
   "permissions": [
 
   ],
