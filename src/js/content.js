@@ -1,7 +1,6 @@
 (function() {
 
 var containerClass = 'player-timedtext-text-container'
-var baseUrl = 'http://api.lingvo.tv/subtitle'
 
 function toArray(obj) {
   return [].slice.call(obj)
@@ -19,18 +18,13 @@ function getSubtitle(container) {
     .join('\n')
 }
 
-function send(text, callback) {
-  var url = baseUrl + '/' + encodeURI(text)
-  fetch(url)
-    .then(function(res) {
-      return res.text()
-    })
-    .then(function(text) {
-      callback(JSON.parse(text))
-    })
-    .catch(function(err) {
-      console.log(err)
-    })
+function send(subtitle, callback) {
+  var message = {
+    ns: 'lingvotv',
+    action: 'translate',
+    payload: subtitle
+  }
+  chrome.runtime.sendMessage(message, callback)
 }
 
 var onChange = (function() {
@@ -57,5 +51,6 @@ var onChange = (function() {
 // DOM Mutation events are deprecated
 // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Mutation_events
 document.addEventListener('DOMNodeInserted', onChange, true)
+
 }())
 

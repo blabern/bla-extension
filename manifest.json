@@ -4,6 +4,11 @@
   "manifest_version": 2,
   "description": "",
   "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": ["src/js/background.js"]
   },
   "content_scripts": [
     {
@@ -13,7 +18,7 @@
         "http://www.netflix.com/*",
         "https://www.netflix.com/*"
       ],
-      "js": ["src/index.js"],
+      "js": ["src/js/content.js"],
       "run_at": "document_start",
       "all_frames": false
     }
