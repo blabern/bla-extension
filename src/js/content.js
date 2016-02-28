@@ -1,5 +1,7 @@
 (function() {
 
+var log = console.log.bind(console)
+
 var containerClass = 'player-timedtext-text-container'
 
 function toArray(obj) {
@@ -13,7 +15,11 @@ function toArray(obj) {
 function getSubtitle(container) {
   return toArray(container.querySelectorAll('.' + containerClass))
     .map(function(node) {
-      return node.textContent
+      return toArray(node.querySelectorAll('span'))
+        .map(function(node) {
+          return node.textContent
+        })
+        .join('\n')
     })
     .join('\n')
 }
@@ -24,6 +30,7 @@ function send(subtitle, callback) {
     action: 'translate',
     payload: subtitle
   }
+  log('Captured subtitle', subtitle)
   chrome.runtime.sendMessage(message, callback)
 }
 
