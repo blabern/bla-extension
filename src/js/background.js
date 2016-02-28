@@ -10,8 +10,8 @@ function generateAuth() {
 var auth = generateAuth()
 
 var ns = 'lingvotv'
-//var baseUrl = 'http://api.lingvo.tv/subtitle'
-var baseUrl = 'http://localhost:3000/subtitle'
+var baseUrl = 'http://api.lingvo.tv/subtitle'
+//var baseUrl = 'http://localhost:3000/subtitle'
 var url = baseUrl + '?auth=' + auth
 
 function send(subtitle, callback) {
