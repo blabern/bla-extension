@@ -1,18 +1,31 @@
 (function() {
 
-function generateAuth() {
-  return Math
-    .random()
-    .toString()
-    .substr(2, 4)
-}
-
-var auth = generateAuth()
-
 var ns = 'lingvotv'
+
+var auth = (function() {
+  function generateAuth() {
+    return Math
+      .random()
+      .toString()
+      .substr(2, 4)
+  }
+
+  var auth = localStorage.getItem(ns + 'Auth')
+  if (auth) return auth
+
+  auth = generateAuth()
+  try {
+    localStorage.setItem(ns + 'Auth', auth)
+  } catch(err) {}
+
+  return auth
+}())
+
+
 var baseUrl = 'http://api.lingvo.tv/subtitle'
 //var baseUrl = 'http://localhost:3000/subtitle'
 var url = baseUrl + '?auth=' + auth
+
 
 function send(subtitle, callback) {
   var options = {
