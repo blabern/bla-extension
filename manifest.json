@@ -1,8 +1,8 @@
 {
-  "name": "Lingvo",
-  "version": "0.1.0",
+  "name": "Lingvo TV",
+  "version": "0.2.0",
   "manifest_version": 2,
-  "description": "",
+  "description": "Learn languages while watching movies online. Translate words and grow your vocabulary, on the go.",
   "browser_action": {
     "default_popup": "popup.html"
   },
@@ -13,10 +13,8 @@
   "content_scripts": [
     {
       "matches": [
-        "http://netflix.com/*",
-        "https://netflix.com/*",
-        "http://www.netflix.com/*",
-        "https://www.netflix.com/*"
+        "*://*.netflix.com/*",
+        "*://*.amazon.com/*", "*://*.amazon.de/*"
       ],
       "js": ["src/js/content.js"],
       "run_at": "document_start",
@@ -32,5 +30,6 @@
 
   ],
   "web_accessible_resources": [
-  ]
+  ],
+  "homepage_url": "http://lingvo.tv"
 }
