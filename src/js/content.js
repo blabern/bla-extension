@@ -92,6 +92,40 @@ adapters.amazon = (function() {
   }
 }())
 
+adapters.youtube = (function() {
+  var containerClass = 'captions-text'
+
+  function getSubtitle(node) {
+    var container = node.children[0]
+    return toArray(container.childNodes)
+      .map(function(node) {
+        if (node.nodeName === 'BR') return '\n'
+        if (node.nodeName === '#text') {
+          return node.textContent.trim()
+        }
+        // Youtube might insert something else than text, ignore it.
+        return ''
+      })
+      .join('')
+  }
+
+  function handle(node) {
+    var text = getSubtitle(node)
+    if (text && hasChanged(text)) {
+      send(text, console.log.bind(console))
+    }
+  }
+
+  return function(e) {
+    var node = e.target.parentNode
+    if (!node.classList || !node.classList.contains(containerClass)) return
+
+    setTimeout(function() {
+      handle(node)
+    }, 20)
+  }
+}())
+
 function getAdapter() {
   for (var name in adapters) {
     if (location.hostname.indexOf(name) !== -1) {
