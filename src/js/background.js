@@ -47,6 +47,30 @@ function send(subtitle, callback) {
     })
 }
 
+var suppressSubtitles = (function() {
+  var key = ns + 'supressSubtitlesUntil'
+  // Same logic is in content script.
+  var lifetime = 2 * 60 * 60 * 1000
+
+  function get(callback) {
+    callback(Number(localStorage.getItem(key)) >= Date.now())
+  }
+
+  function set(suppress, callback) {
+    try {
+      localStorage.setItem(key, suppress ? Date.now() + lifetime : 0)
+    } catch(err) {
+      return
+    }
+    callback()
+  }
+
+  return {
+    get: get,
+    set: set
+  }
+}())
+
 chrome.runtime.onMessage.addListener(function(req, sender, callback) {
   if (req.ns !== ns) return
 
@@ -55,6 +79,10 @@ chrome.runtime.onMessage.addListener(function(req, sender, callback) {
       return send(req.payload, callback)
     case 'getAuth':
       return callback({auth: auth})
+    case 'getSuppressSubtitles':
+      return suppressSubtitles.get(callback)
+    case 'toggleSubtitles':
+      return suppressSubtitles.set(req.payload, callback)
   }
 })
 

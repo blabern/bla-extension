@@ -23,9 +23,11 @@ var hasChanged = (function() {
   }
 }())
 
+var ns = 'lingvotv'
+
 function send(subtitle, callback) {
   var message = {
-    ns: 'lingvotv',
+    ns: ns,
     action: 'translate',
     payload: subtitle
   }
@@ -34,6 +36,17 @@ function send(subtitle, callback) {
 }
 
 var adapters = {}
+var options = {
+  suppressSubtitles: false
+}
+
+chrome.runtime.sendMessage({
+  ns: ns,
+  action: 'getSuppressSubtitles'
+}, function(isSuppressed) {
+  options.suppressSubtitles = isSuppressed
+})
+
 
 adapters.netflix = (function() {
   var containerClass = 'player-timedtext-text-container'
@@ -58,13 +71,18 @@ adapters.netflix = (function() {
     var text = getSubtitle(node)
 
     if (text && hasChanged(text)) {
-      send(text, console.log.bind(console))
+      send(text, log)
     }
+  }
+
+  function toggleSubtitles(node) {
+    node.style.display = options.suppressSubtitles ? 'none' : 'block'
   }
 
   return function(e) {
     var node = e.target
     if (!node.classList || !node.classList.contains(containerClass)) return
+    toggleSubtitles(node)
     var parent = node.parentNode
     setTimeout(function() {
       handle(parent)
@@ -82,10 +100,14 @@ adapters.amazon = (function() {
     }
   }
 
+  function toggleSubtitles(node) {
+    node.style.display = options.suppressSubtitles ? 'none' : 'block'
+  }
+
   return function(e) {
     var node = e.target.parentNode
     if (!node.classList || !node.classList.contains(containerClass)) return
-
+    toggleSubtitles(node)
     setTimeout(function() {
       handle(node)
     }, 20)
@@ -116,10 +138,14 @@ adapters.youtube = (function() {
     }
   }
 
+  function toggleSubtitles(node) {
+    node.style.display = options.suppressSubtitles ? 'none' : 'block'
+  }
+
   return function(e) {
     var node = e.target.parentNode
     if (!node.classList || !node.classList.contains(containerClass)) return
-
+    toggleSubtitles(node)
     setTimeout(function() {
       handle(node)
     }, 20)
@@ -139,5 +165,12 @@ function getAdapter() {
 // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Mutation_events
 document.addEventListener('DOMNodeInserted', getAdapter(), true)
 
+chrome.runtime.onMessage.addListener(function(req, sender, callback) {
+  if (req.ns !== ns) return
+
+  if (req.action === 'toggleSubtitles')  {
+    options.suppressSubtitles = req.payload
+  }
+})
 }())
 

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lingvo</title>
+    <title>LingvoTV</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./src/css/popup.css">
-    <script src="./src/js/popup.js"></script>
   </head>
   <body>
-    <div class="auth"></div>
-    <p>Open the <a href="http://app.lingvo.tv" target="_blank">app</a> on your phone and enter the code.</p>
+    <section class="auth-section">
+      <div class="auth"></div>
+      <p class="auth-hint">Open the <a href="http://app.lingvo.tv" target="_blank">app</a> on your phone and enter the code to connect.</p>
+    </section>
+    <section class="suppress-section">
+      <label>
+        <input type="checkbox" class="suppress" />
+        Suppress subtitles on the primary display.
+      </label>
+    </section>
+    <script src="./src/js/popup.js"></script>
   </body>
 </html>
