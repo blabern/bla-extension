@@ -14,9 +14,21 @@
     {
       "matches": [
         "*://*.netflix.com/*",
+        "*://*.youtube.com/*",
         "*://*.amazon.com/*",
+        "*://*.amazon.com.au/*",
+        "*://*.amazon.com.br/*",
+        "*://*.amazon.com.ca/*",
+        "*://*.amazon.com.cn/*",
+        "*://*.amazon.com.fr/*",
         "*://*.amazon.de/*",
-        "*://*.youtube.com/*"
+        "*://*.amazon.in/*",
+        "*://*.amazon.it/*",
+        "*://*.amazon.jp/*",
+        "*://*.amazon.com.mx/*",
+        "*://*.amazon.nl/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.se/*"
       ],
       "js": ["src/js/content.js"],
       "run_at": "document_start",
