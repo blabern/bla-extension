@@ -3,7 +3,7 @@
 
   var auth = (function () {
     function generateAuth() {
-      return Math.random().toString().substr(2, 4);
+      return Math.random().toString().substr(2, 6);
     }
 
     var auth = localStorage.getItem(ns + "Auth");
