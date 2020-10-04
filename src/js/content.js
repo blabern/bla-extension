@@ -120,16 +120,7 @@
 
     function getSubtitle(node) {
       var container = node.children[0];
-      return toArray(container.childNodes)
-        .map(function (node) {
-          if (node.nodeName === "BR") return "\n";
-          if (node.nodeName === "#text") {
-            return node.textContent.trim();
-          }
-          // Youtube might insert something else than text, ignore it.
-          return "";
-        })
-        .join("");
+      return node.innerText;
     }
 
     function handle(node) {
