@@ -6,13 +6,25 @@
     <link rel="stylesheet" href="./src/css/popup.css" />
   </head>
   <body>
-    <section class="auth-section">
-      <div class="auth"></div>
-      <p class="auth-hint">
+    <section class="login-section">
+      <form>
+        <label
+          >Email:<br />
+          <input reuired type="email" />
+        </label>
+        <button>Login</button>
+        <p>Login is required to get the access code for the app.</p>
+      </form>
+    </section>
+
+    <section class="code-section">
+      <div class="code"></div>
+      <p class="code-hint">
         Open the <a href="http://app.lingvo.tv" target="_blank">app</a> on your
         phone and enter the code to connect.
       </p>
     </section>
+
     <section class="suppress-section">
       <label>
         <input type="checkbox" class="suppress" />

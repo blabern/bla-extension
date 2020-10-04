@@ -21,7 +21,18 @@
   //var baseUrl = 'http://localhost:3000/subtitle'
   var url = baseUrl + "?auth=" + auth;
 
-  function send(subtitle, callback) {
+  function verifyEmail(email, callback) {
+    // TODO actually verify
+    localStorage.setItem(ns + "Email", email);
+    callback({ verified: true });
+  }
+
+  function getEmail(callback) {
+    var email = localStorage.getItem(ns + "Email");
+    callback({ email: email });
+  }
+
+  function translate(subtitle, callback) {
     var options = {
       method: "POST",
       body: JSON.stringify({ subtitle: subtitle }),
@@ -69,10 +80,14 @@
     if (req.ns !== ns) return;
 
     switch (req.action) {
-      case "translate":
-        return send(req.payload, callback);
       case "getAuth":
         return callback({ auth: auth });
+      case "getEmail":
+        return getEmail(callback);
+      case "verifyEmail":
+        return verifyEmail(req.payload, callback);
+      case "translate":
+        return translate(req.payload, callback);
       case "getSuppressSubtitles":
         return suppressSubtitles.get(callback);
       case "toggleSubtitles":

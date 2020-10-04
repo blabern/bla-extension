@@ -8,10 +8,11 @@ body {
 section {
   margin: 30px 20px;
 }
-.auth-section {
+.code-section {
+  display: none;
   text-align: center;
 }
-.auth {
+.code {
   display: inline-block;
   margin-top: 20%;
   padding: 5px 10px;
@@ -19,9 +20,26 @@ section {
   letter-spacing: 5px;
   border: 1px solid #fff;
 }
-.auth-hint {
+.code-hint {
   font-size: 1.2em;
 }
 a {
   color: #26ade4;
+}
+.suppress-section {
+  display: none;
+}
+.login-section {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.email-verified .code-section,
+.email-verified .suppress-section {
+  display: block;
+}
+.email-verified .login-section {
+  display: none;
 }

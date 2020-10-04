@@ -7,14 +7,55 @@
       action: "getAuth",
     };
 
-    function renderAuth(auth) {
-      document.querySelectorAll(".auth")[0].textContent = auth;
+    function renderCode(auth) {
+      document.querySelector(".code").textContent = auth;
     }
 
     chrome.runtime.sendMessage(message, function (res) {
-      renderAuth(res.auth);
+      renderCode(res.auth);
     });
   })();
+
+  (function () {
+    var emailEl = document.querySelector('input[type="email"]');
+
+    function markAsVerified() {
+      document.body.classList.add("email-verified");
+    }
+
+    function verify() {
+      var message = {
+        ns: ns,
+        action: "verifyEmail",
+        payload: emailEl.value,
+      };
+      chrome.runtime.sendMessage(message, function (res) {
+        if (res.verified) {
+          return markAsVerified();
+        }
+      });
+    }
+
+    function getEmail() {
+      var message = {
+        ns: ns,
+        action: "getEmail",
+      };
+      chrome.runtime.sendMessage(message, function (res) {
+        if (res.email) markAsVerified();
+      });
+    }
+
+    document
+      .querySelector(".login-section form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+        verify();
+      });
+
+    getEmail();
+  })();
+
   (function () {
     var input = document.querySelectorAll(".suppress")[0];
 
