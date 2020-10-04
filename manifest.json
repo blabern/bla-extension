@@ -14,7 +14,8 @@
     {
       "matches": [
         "*://*.netflix.com/*",
-        "*://*.amazon.com/*", "*://*.amazon.de/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.de/*",
         "*://*.youtube.com/*"
       ],
       "js": ["src/js/content.js"],
@@ -27,10 +28,7 @@
     "48": "src/img/logo-48x48.png",
     "128": "src/img/logo-128x128.png"
   },
-  "permissions": [
-
-  ],
-  "web_accessible_resources": [
-  ],
+  "permissions": [],
+  "web_accessible_resources": [],
   "homepage_url": "http://lingvo.tv"
 }
