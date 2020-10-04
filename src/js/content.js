@@ -92,10 +92,10 @@
   })();
 
   adapters.amazon = (function () {
-    var containerClass = "timedTextBackground";
+    var containerClass = "captions-text";
 
     function handle(node) {
-      var text = node.innerHTML.split("<br>").join("\n");
+      var text = node.innerText;
       if (text && hasChanged(text)) {
         send(text, console.log.bind(console));
       }
@@ -107,7 +107,10 @@
 
     return function (e) {
       var node = e.target.parentNode;
-      if (!node.classList || !node.classList.contains(containerClass)) return;
+      if (node.className.includes(containerClass) === false) {
+        node = node.querySelector('[class*="' + containerClass + '"]');
+        if (!node) return;
+      }
       toggleSubtitles(node);
       setTimeout(function () {
         handle(node);
