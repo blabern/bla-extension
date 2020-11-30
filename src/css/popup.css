@@ -11,8 +11,8 @@ section {
 .auth-section {
   text-align: center;
 }
-.auth {
-  display: inline-block;
+.code {
+  display: block;
   margin-top: 20%;
   padding: 5px 10px;
   font-size: 4em;
@@ -22,6 +22,16 @@ section {
 .auth-hint {
   font-size: 1.2em;
 }
+.email-label {
+  font-size: 1.2em;
+  display: block;
+  margin-top: 20px;
+  padding: 20px;
+}
+.active {
+  border: 1px solid green;
+}
+
 a {
   color: #26ade4;
 }

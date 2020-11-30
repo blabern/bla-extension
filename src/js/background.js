@@ -1,25 +1,26 @@
 (function () {
   var ns = "lingvotv";
 
-  var auth = (function () {
-    function generateAuth() {
+  var code = (function () {
+    var key = ns + "Auth";
+
+    function generateCode() {
       return Math.random().toString().substr(2, 6);
     }
 
-    var auth = localStorage.getItem(ns + "Auth");
-    if (auth) return auth;
+    var value = localStorage.getItem(key);
+    if (value) return value;
 
-    auth = generateAuth();
+    value = generateCode();
     try {
-      localStorage.setItem(ns + "Auth", auth);
+      localStorage.setItem(key, value);
     } catch (err) {}
 
-    return auth;
+    return value;
   })();
 
   var baseUrl = "http://api.lingvo.tv/subtitle";
   //var baseUrl = 'http://localhost:3000/subtitle'
-  var url = baseUrl + "?auth=" + auth;
 
   function send(subtitle, callback) {
     var options = {
@@ -29,6 +30,7 @@
         "Content-Type": "application/json",
       }),
     };
+    var url = baseUrl + "?auth=" + (email.get() || code);
     fetch(url, options)
       .then(function (res) {
         return res.text();
@@ -65,18 +67,45 @@
     };
   })();
 
+  var email = (function () {
+    var key = ns + "Email";
+
+    function get(callback) {
+      return localStorage.getItem(key);
+    }
+
+    function set(payload, callback) {
+      try {
+        if (payload) localStorage.setItem(key, payload);
+        else localStorage.removeItem(key);
+      } catch (err) {
+        return;
+      }
+      callback({ email: payload });
+    }
+
+    return {
+      get: get,
+      set: set,
+    };
+  })();
+
   chrome.runtime.onMessage.addListener(function (req, sender, callback) {
     if (req.ns !== ns) return;
 
     switch (req.action) {
       case "translate":
         return send(req.payload, callback);
-      case "getAuth":
-        return callback({ auth: auth });
+      case "getCode":
+        return callback({ code: code });
       case "getSuppressSubtitles":
         return suppressSubtitles.get(callback);
       case "toggleSubtitles":
         return suppressSubtitles.set(req.payload, callback);
+      case "setEmail":
+        return email.set(req.payload, callback);
+      case "getEmail":
+        return callback({ email: email.get() });
     }
   });
 })();
