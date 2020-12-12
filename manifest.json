@@ -1,6 +1,6 @@
 {
   "name": "Lingvo TV",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "manifest_version": 2,
   "description": "Learn languages while watching movies online. Translate words and grow your vocabulary, on the go.",
   "browser_action": {
