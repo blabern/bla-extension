@@ -1,36 +1,9 @@
 (function () {
   var ns = "lingvotv";
-  var codeEl = document.querySelector(".code");
-
-  (function () {
-    var message = {
-      ns: ns,
-      action: "getCode",
-    };
-
-    function renderCode(code) {
-      codeEl.textContent = code;
-    }
-
-    chrome.runtime.sendMessage(message, function (res) {
-      console.log(res);
-      renderCode(res.code);
-    });
-  })();
 
   (function () {
     var emailEl = document.querySelector(".email");
     var timeoutId;
-
-    function highlightActive(email) {
-      if (email) {
-        emailEl.parentNode.classList.add("active");
-        codeEl.classList.remove("active");
-      } else {
-        emailEl.parentNode.classList.remove("active");
-        codeEl.classList.add("active");
-      }
-    }
 
     function setEmail() {
       var email = emailEl.value.trim();
@@ -39,7 +12,6 @@
         action: "setEmail",
         payload: email,
       };
-      highlightActive(email);
       chrome.runtime.sendMessage(message, function (res) {
         console.log(res);
       });
@@ -60,7 +32,6 @@
         if (res.email) {
           emailEl.value = res.email;
         }
-        highlightActive(res.email);
       }
     );
   })();

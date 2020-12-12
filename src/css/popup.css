@@ -11,14 +11,6 @@ section {
 .auth-section {
   text-align: center;
 }
-.code {
-  display: block;
-  margin-top: 20%;
-  padding: 5px 10px;
-  font-size: 4em;
-  letter-spacing: 5px;
-  border: 1px solid #fff;
-}
 .auth-hint {
   font-size: 1.2em;
 }
@@ -28,10 +20,6 @@ section {
   margin-top: 20px;
   padding: 20px;
 }
-.active {
-  border: 1px solid green;
-}
-
 a {
   color: #26ade4;
 }

@@ -1,24 +1,6 @@
 (function () {
   var ns = "lingvotv";
 
-  var code = (function () {
-    var key = ns + "Auth";
-
-    function generateCode() {
-      return Math.random().toString().substr(2, 6);
-    }
-
-    var value = localStorage.getItem(key);
-    if (value) return value;
-
-    value = generateCode();
-    try {
-      localStorage.setItem(key, value);
-    } catch (err) {}
-
-    return value;
-  })();
-
   var baseUrl = "https://api.lingvo.tv/subtitle";
   //var baseUrl = 'http://localhost:3000/subtitle'
 
@@ -30,7 +12,7 @@
         "Content-Type": "application/json",
       }),
     };
-    var url = baseUrl + "?auth=" + (email.get() || code);
+    var url = baseUrl + "?auth=" + email.get();
     fetch(url, options)
       .then(function (res) {
         return res.text();
@@ -96,8 +78,6 @@
     switch (req.action) {
       case "translate":
         return send(req.payload, callback);
-      case "getCode":
-        return callback({ code: code });
       case "getSuppressSubtitles":
         return suppressSubtitles.get(callback);
       case "toggleSubtitles":
