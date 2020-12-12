@@ -19,7 +19,7 @@
     return value;
   })();
 
-  var baseUrl = "http://api.lingvo.tv/subtitle";
+  var baseUrl = "https://api.lingvo.tv/subtitle";
   //var baseUrl = 'http://localhost:3000/subtitle'
 
   function send(subtitle, callback) {
