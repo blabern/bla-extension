@@ -2,18 +2,17 @@
   var ns = "lingvotv";
 
   var baseUrl = "https://api.lingvo.tv/subtitle";
-  //var baseUrl = 'http://localhost:3000/subtitle'
+  //baseUrl = "http://localhost:3000/subtitle";
 
   function send(subtitle, callback) {
     var options = {
       method: "POST",
-      body: JSON.stringify({ subtitle: subtitle }),
+      body: JSON.stringify({ subtitle: subtitle, auth: email.get() }),
       headers: new Headers({
         "Content-Type": "application/json",
       }),
     };
-    var url = baseUrl + "?auth=" + email.get();
-    fetch(url, options)
+    fetch(baseUrl, options)
       .then(function (res) {
         return res.text();
       })
