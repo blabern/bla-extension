@@ -1,25 +1,30 @@
 body {
-  height: 300px;
-  width: 300px;
+  min-width: 250px;
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
   background: #000;
   color: #fff;
-  margin: 0;
 }
 section {
-  margin: 30px 20px;
-}
-.auth-section {
-  text-align: center;
-}
-.auth-hint {
+  margin-bottom: 20px;
   font-size: 1.2em;
 }
-.email-label {
-  font-size: 1.2em;
-  display: block;
-  margin-top: 20px;
-  padding: 20px;
+input {
+  margin: 0;
 }
 a {
   color: #26ade4;
+}
+
+.auth-hint {
+  margin: 0;
+  padding: 0;
+  padding-left: 1em;
+}
+.auth-hint li {
+  list-style: decimal;
+  text-align: left;
+  margin-bottom: 0.5em;
 }

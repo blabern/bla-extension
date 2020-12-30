@@ -2,8 +2,8 @@
   var ns = "lingvotv";
 
   (function () {
-    var emailEl = document.querySelector(".email");
-    var timeoutId;
+    var emailFormEl = document.querySelector(".email-form");
+    var emailEl = emailFormEl.querySelector('[type="email"]');
 
     function setEmail() {
       var email = emailEl.value.trim();
@@ -17,12 +17,6 @@
       });
     }
 
-    // keypress won't fire when you remove the value with backspace
-    emailEl.onkeyup = function () {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(setEmail, 200);
-    };
-
     chrome.runtime.sendMessage(
       {
         ns: ns,
@@ -34,6 +28,11 @@
         }
       }
     );
+
+    emailFormEl.addEventListener("submit", (event) => {
+      event.preventDefault();
+      setEmail();
+    });
   })();
 
   (function () {

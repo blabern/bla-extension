@@ -6,19 +6,27 @@
     <link rel="stylesheet" href="./src/css/popup.css" />
   </head>
   <body>
-    <section class="auth-section">
-      <label class="email-label"
-        >Email: <input class="email" type="email" />
-      </label>
-      <p class="auth-hint">
-        Open the <a href="http://app.lingvo.tv" target="_blank">app</a> on your
-        phone and login with the same email.
-      </p>
+    <section>
+      <ul class="auth-hint">
+        <li>
+          Open
+          <a href="http://app.lingvo.tv" target="_blank">app.lingvo.tv</a> Web
+          App <br />on your phone, tablet or a separate window
+        </li>
+        <li>Login there</li>
+        <li>
+          Enter the same email:<br /><br />
+          <form class="email-form">
+            <input type="email" />
+            <button type="submit">connect</button>
+          </form>
+        </li>
+      </ul>
     </section>
     <section class="suppress-section">
       <label>
         <input type="checkbox" class="suppress" />
-        Suppress subtitles on the primary display.
+        Hide subtitles on the video
       </label>
     </section>
     <script src="./src/js/popup.js"></script>
