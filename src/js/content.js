@@ -27,7 +27,7 @@
   function send(subtitle, callback) {
     var message = {
       ns: ns,
-      action: "translate",
+      action: "subtitle",
       payload: subtitle,
     };
     log("Captured subtitle", subtitle);

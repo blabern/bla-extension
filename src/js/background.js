@@ -1,10 +1,10 @@
 (function () {
   var ns = "lingvotv";
 
-  var baseUrl = "https://api.lingvo.tv/subtitle";
-  //baseUrl = "http://localhost:3000/subtitle";
+  var baseUrl = "https://api.lingvo.tv";
+  // baseUrl = "http://localhost:3000";
 
-  function send(subtitle, callback) {
+  function sendSubtitle(subtitle, callback) {
     var options = {
       method: "POST",
       body: JSON.stringify({ subtitle: subtitle, auth: email.get() }),
@@ -12,15 +12,15 @@
         "Content-Type": "application/json",
       }),
     };
-    fetch(baseUrl, options)
+    fetch(baseUrl + "/subtitle", options)
       .then(function (res) {
-        return res.text();
+        return res.json();
       })
-      .then(function (text) {
-        callback(JSON.parse(text));
+      .then(function (response) {
+        callback(response);
       })
       .catch(function (err) {
-        callback({ message: err.message, stack: err.stack });
+        callback({ error: err.message, stack: err.stack });
       });
   }
 
@@ -75,8 +75,8 @@
     if (req.ns !== ns) return;
 
     switch (req.action) {
-      case "translate":
-        return send(req.payload, callback);
+      case "subtitle":
+        return sendSubtitle(req.payload, callback);
       case "getSuppressSubtitles":
         return suppressSubtitles.get(callback);
       case "toggleSubtitles":
