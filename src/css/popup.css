@@ -1,16 +1,19 @@
 body {
-  min-width: 250px;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  min-width: 280px;
   margin: 2em;
   display: flex;
   flex-direction: column;
-  font-size: 14px;
   background: #000;
   color: #fff;
 }
 section {
-  margin-bottom: 20px;
+  padding: 20px 0;
   font-size: 1.2em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
+
 input {
   margin: 0;
 }
@@ -18,13 +21,21 @@ a {
   color: #26ade4;
 }
 
-.auth-hint {
+.connect {
+  padding-top: 0;
+}
+.connect ul {
   margin: 0;
   padding: 0;
   padding-left: 1em;
 }
-.auth-hint li {
+.connect li {
   list-style: decimal;
   text-align: left;
   margin-bottom: 0.5em;
+}
+
+.suppress-section {
+  padding-bottom: 0;
+  border: none;
 }
