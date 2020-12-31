@@ -34,7 +34,13 @@ a {
   text-align: left;
   margin-bottom: 0.5em;
 }
-
+.connect .status {
+  padding: 0.5em 0;
+  color: green;
+}
+.connect .status.error {
+  color: red;
+}
 .suppress-section {
   padding-bottom: 0;
   border: none;

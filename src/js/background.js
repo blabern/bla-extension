@@ -2,7 +2,7 @@
   var ns = "lingvotv";
 
   var baseUrl = "https://api.lingvo.tv";
-  // baseUrl = "http://localhost:3000";
+  baseUrl = "http://localhost:3000";
 
   function sendSubtitle(subtitle, callback) {
     var options = {
