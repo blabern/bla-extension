@@ -20,6 +20,9 @@ input {
 a {
   color: #26ade4;
 }
+.hidden {
+  display: none;
+}
 
 .connect {
   padding-top: 0;
