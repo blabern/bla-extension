@@ -62,7 +62,11 @@
       }
 
       statusEl.classList.remove("error");
-      statusEl.textContent = res.connected + " Web Apps are connected";
+      if (res.connected === 1) {
+        statusEl.textContent = res.connected + " Web App is connected";
+      } else {
+        statusEl.textContent = res.connected + " Web Apps are connected";
+      }
     }
 
     function setEmail() {
